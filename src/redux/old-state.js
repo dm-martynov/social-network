@@ -1,7 +1,6 @@
-const ADD_POST = "ADD_POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-const ADD_MESSAGE = "ADD_MESSAGE";
-const UPDATE_NEW_MESSAGE = "UPDATE-NEW-MESSAGE";
+import { dialogsReducer } from "./dialogs-reducer";
+import { profileReducer } from "./profile-reducer";
+import { sidebarReducer } from "./sidebar-reducer";
 
 let store = {
   _state: {
@@ -89,12 +88,12 @@ let store = {
       ],
       newMessageBody: "dick",
     },
+    sidebar: {},
   },
   getState() {
     return this._state;
   },
   subscribe(observer) {
-    debugger;
     this._rerenderEntireTree = observer;
   },
   _rerenderEntireTree() {
@@ -104,7 +103,7 @@ let store = {
     let newPost = {
       id: 5,
       message: this._state.profilePage.newPostText,
-      likesCount: 0,
+      likesCount: 2,
     };
     this._state.profilePage.postsData.push(newPost);
     this._rerenderEntireTree(this._state);
@@ -112,66 +111,32 @@ let store = {
   },
   _updateNewPostText(newText) {
     this._state.profilePage.newPostText = newText;
+    console.log(this._state.profilePage.newPostText);
     this._rerenderEntireTree(this._state);
   },
   _addMessage() {
-    let newPost = {
+    let newMessage = {
       id: 7,
-      message: this._state.dialogsPage.newPostText,
+      message: this._state.dialogsPage.newMessageBody,
     };
-    this._state.dialogsPage.messagesData.push(newPost);
+
+    this._state.dialogsPage.messagesData.push(newMessage);
+
     this._rerenderEntireTree(this._state);
     this._state.dialogsPage.newMessageBody = "";
   },
   _updateNewMessageText(newText) {
     this._state.dialogsPage.newMessageBody = newText;
+    console.log(newText);
     this._rerenderEntireTree(this._state);
   },
 
   dispatch(action) {
-    switch (action.type) {
-      case ADD_POST:
-        this._addPost();
-        break;
-      case UPDATE_NEW_POST_TEXT:
-        this._updateNewPostText(action.newText);
-        break;
-      case ADD_MESSAGE:
-        this._addMessage();
-        break;
-      case UPDATE_NEW_MESSAGE:
-        this._updateNewMessageText(action.newText);
-        break;
-      default:
-        console.log("nothing to dispatch");
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+    this._rerenderEntireTree(this._state);
   },
-};
-
-export const addPostActionCreator = () => {
-  return {
-    type: ADD_POST,
-  };
-};
-
-export const updateNewPostActionCreator = (text) => {
-  return {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
-  };
-};
-
-export const addNewMessage = () => {
-  return {
-    type: ADD_MESSAGE,
-  };
-};
-
-export const updateNewMessageText = (text) => {
-  return {
-    type: UPDATE_NEW_MESSAGE,
-    newText: text,
-  };
 };
 
 export default store;
