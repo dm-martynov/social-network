@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./users.module.css";
 import userPhoto from "../../../src/assets/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png";
+import { NavLink } from "react-router-dom";
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -28,11 +29,15 @@ let Users = (props) => {
         <div key={user.id}>
           <span>
             <div>
-              <img
-                alt="avatar"
-                src={user.photos.small != null ? user.photos.small : userPhoto}
-                className={classes.userPhoto}
-              />
+              <NavLink to={"/profile/" + user.id}>
+                <img
+                  alt="avatar"
+                  src={
+                    user.photos.small != null ? user.photos.small : userPhoto
+                  }
+                  className={classes.userPhoto}
+                />
+              </NavLink>
             </div>
             <div>
               {user.followed ? (

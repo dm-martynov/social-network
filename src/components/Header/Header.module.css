@@ -1,8 +1,15 @@
 .header {
   grid-area: h;
   background-color: green;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
 }
 
 .header img {
   height: 100%;
+}
+
+.loginBlock a {
+  color: white;
 }
