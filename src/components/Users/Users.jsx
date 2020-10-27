@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./users.module.css";
 import userPhoto from "../../../src/assets/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png";
 import { NavLink } from "react-router-dom";
+import { usersAPI } from "../../api/api";
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -41,11 +42,41 @@ let Users = (props) => {
             </div>
             <div>
               {user.followed ? (
-                <button onClick={() => props.unfollow(user.id)}>
+                <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )}
+                  onClick={() => {
+                    props.toggleFollowingProgress(true, user.id);
+                    usersAPI.deleteFollowing(user.id).then((data) => {
+                      if (data.resultCode === 0) {
+                        props.unfollow(user.id);
+                      }
+                      props.toggleFollowingProgress(false, user.id);
+                    });
+                  }}
+                >
                   Unfollow
                 </button>
               ) : (
-                <button onClick={() => props.follow(user.id)}>Follow</button>
+                <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )}
+                  onClick={() => {
+                    props.toggleFollowingProgress(true, user.id);
+
+                    usersAPI.addFollowing(user.id).then((data) => {
+                      debugger;
+                      if (data.resultCode === 0) {
+                        props.follow(user.id);
+                      }
+                      props.toggleFollowingProgress(false, user.id);
+                    });
+                  }}
+                >
+                  Follow
+                </button>
               )}
             </div>
           </span>
