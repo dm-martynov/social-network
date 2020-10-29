@@ -3,6 +3,7 @@ import { profileAPI } from "../api/api";
 const ADD_POST = "ADD_POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 let initialState = {
   postsData: [
@@ -13,6 +14,7 @@ let initialState = {
   ],
   newPostText: "it-kamasutra.com",
   profile: null,
+  status: "dick",
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -34,6 +36,8 @@ export const profileReducer = (state = initialState, action) => {
 
     case SET_USER_PROFILE:
       return { ...state, profile: action.profile };
+    case SET_STATUS:
+      return { ...state, status: action.status };
 
     default:
       return state;
@@ -57,6 +61,31 @@ export const updateNewPostActionCreator = (text) => {
   return {
     type: UPDATE_NEW_POST_TEXT,
     newText: text,
+  };
+};
+
+export const setStatus = (status) => {
+  return {
+    type: SET_STATUS,
+    status,
+  };
+};
+
+export const getStatus = (userId) => {
+  return (dispatch) => {
+    profileAPI.getStatus(userId).then((data) => {
+      dispatch(setStatus(data));
+    });
+  };
+};
+
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then((data) => {
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status));
+      }
+    });
   };
 };
 
