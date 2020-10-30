@@ -9,7 +9,6 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/preloader/preloader";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 class UsersContainer extends React.Component {
@@ -58,6 +57,5 @@ export default compose(
     setCurrentPage,
     toggleFollowingProgress,
     getUsers,
-  }),
-  withAuthRedirect
+  })
 )(UsersContainer);
