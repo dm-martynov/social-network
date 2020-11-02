@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./users.module.css";
-import userPhoto from "../../../src/assets/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png";
+import userPhoto from "../../../src/assets/user_no_image.png";
 import { NavLink } from "react-router-dom";
 
 let User = ({ user, followingInProgress, unfollow, follow }, ...props) => {
