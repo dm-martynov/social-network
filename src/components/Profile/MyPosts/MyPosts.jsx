@@ -20,6 +20,7 @@ const MyPosts = React.memo((props) => {
       <div className={classes.posts}>
         {props.postsData.map((post) => (
           <Post
+            key={post.id}
             message={post.message}
             likesCount={post.likesCount}
             id={post.id}
