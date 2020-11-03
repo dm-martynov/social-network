@@ -1,13 +1,13 @@
-import classes from "./ProfileInfo.module.css";
+import classes from "../ProfileInfo.module.css";
 import React from "react";
 import { reduxForm } from "redux-form";
 import {
   createField,
   Input,
   Textarea,
-} from "../../common/FormsControls/FormsControls";
+} from "../../../common/FormsControls/FormsControls";
 
-import styles from "../../../components/common/FormsControls/FormsControls.module.css";
+import styles from "../../../../components/common/FormsControls/FormsControls.module.css";
 
 const ProfileDataForm = ({ handleSubmit, profile, error }) => {
   return (

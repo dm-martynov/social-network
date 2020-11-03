@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "../Profile";
+import Profile from "./Profile";
 import { connect } from "react-redux";
 import {
   getUserProfile,
@@ -7,9 +7,9 @@ import {
   updateStatus,
   savePhoto,
   saveProfile,
-} from "./../../../redux/profile-reducer";
+} from "../../redux/profile-reducer";
 import { withRouter } from "react-router-dom";
-import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 class ProfileContainer extends React.Component {

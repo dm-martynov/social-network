@@ -17,7 +17,7 @@ const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/Dialogs-Container")
 );
 const ProfileContainer = React.lazy(() =>
-  import("./components/Profile/ProfileInfo/ProfileContainer")
+  import("./components/Profile/ProfileContainer")
 );
 
 class App extends React.Component {
