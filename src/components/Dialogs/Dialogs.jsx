@@ -2,10 +2,11 @@ import React from "react";
 
 import { AddMessageFormRedux } from "./AddMessageForm/AddMessageForm";
 
-import DialogItem from "./DialogItem/DialogItem";
+
 
 import classes from "./Dialogs.module.css";
 import Message from "./Message/Message";
+import DialogItem from "./DialogItem/DialogItem";
 
 const Dialogs = (props) => {
   let dialogsElements = props.dialogsPage.dialogsData.map((dialog) => (
@@ -19,6 +20,9 @@ const Dialogs = (props) => {
   let addNewMessage = (values) => {
     props.addNewMessage(values.newMessageBody);
   };
+
+
+
 
   return (
     <div className={classes.dialogs}>

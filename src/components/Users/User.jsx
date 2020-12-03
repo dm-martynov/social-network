@@ -1,16 +1,16 @@
-import React from "react";
-import classes from "./users.module.css";
-import userPhoto from "../../../src/assets/user_no_image.png";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import classes from './users.module.css'
+import userPhoto from '../../../src/assets/user_no_image.png'
+import { NavLink } from 'react-router-dom'
 
 let User = ({ user, followingInProgress, unfollow, follow }, ...props) => {
   return (
     <div key={props.key}>
       <span>
         <div>
-          <NavLink to={"/profile/" + user.id}>
+          <NavLink to={'/profile/' + user.id}>
             <img
-              alt="avatar"
+              alt='avatar'
               src={user.photos.small != null ? user.photos.small : userPhoto}
               className={classes.userPhoto}
             />
@@ -21,7 +21,7 @@ let User = ({ user, followingInProgress, unfollow, follow }, ...props) => {
             <button
               disabled={followingInProgress.some((id) => id === user.id)}
               onClick={() => {
-                unfollow(user.id);
+                unfollow(user.id)
               }}
             >
               Unfollow
@@ -30,7 +30,7 @@ let User = ({ user, followingInProgress, unfollow, follow }, ...props) => {
             <button
               disabled={followingInProgress.some((id) => id === user.id)}
               onClick={() => {
-                follow(user.id);
+                follow(user.id)
               }}
             >
               Follow
@@ -44,12 +44,12 @@ let User = ({ user, followingInProgress, unfollow, follow }, ...props) => {
           <div>{user.status}</div>
         </span>
         <span>
-          <div>{"user.location.country"}</div>
-          <div>{"user.location.city"}</div>
+          <div>{'user.location.country'}</div>
+          <div>{'user.location.city'}</div>
         </span>
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default User;
+export default User
