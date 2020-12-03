@@ -5,7 +5,7 @@ import {
   unfollow,
   toggleFollowingProgress,
   requestUsers,
-} from '../../redux/users/users-reducer'
+} from '../../redux/users/users.reducer'
 import React from 'react'
 import Users from './Users'
 import Preloader from '../common/preloader/preloader'

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { required } from '../../utils/validators/validators'
 import { createField, Input } from '../common/FormsControls/FormsControls'
-import { login } from '../../redux/auth/auth.reducer'
+
 import { Redirect } from 'react-router-dom'
 import classes from '../../components/common/FormsControls/FormsControls.module.css'
+import { login } from '../../redux/auth/auth.thunks'
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (

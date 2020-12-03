@@ -10,7 +10,7 @@ import Login from './components/Login/Login'
 import Navbar from './components/Navbar/Navbar'
 import UsersContainer from './components/Users/UsersContainer'
 import { withSuspense } from './hoc/withSuspense'
-import { initializeApp } from './redux/app/app.reducer'
+import { initializeApp } from './redux/app/app.thunks'
 import store from './redux/store'
 
 const DialogsContainer = React.lazy(() =>
