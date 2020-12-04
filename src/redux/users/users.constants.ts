@@ -1,4 +1,4 @@
-export const usersActionTypes = {
+export const usersActionConst = {
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW',
   SET_USERS: 'SET_USERS',
@@ -6,4 +6,4 @@ export const usersActionTypes = {
   SET_TOTAL_USERS_COUNT: 'SET_TOTAL_USERS_COUNT',
   TOGGLE_IS_FETCHING: 'TOGGLE_IS_FETCHING',
   TOGGLE_IS_FOLLOWING_PROGRESS: 'TOGGLE_IS_FOLLOWING_PROGRESS',
-}
+} as const

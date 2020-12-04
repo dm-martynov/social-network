@@ -1,5 +1,5 @@
 import { ProfileType, PhotosType } from './profile.reducer'
-import { profileActionTypes } from './profile.types'
+import { profileActionTypes } from './profile.constants'
 
 type AddPostActionCreatorType = {
   type: typeof profileActionTypes.ADD_POST

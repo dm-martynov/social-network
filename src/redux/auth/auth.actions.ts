@@ -1,4 +1,4 @@
-import { authActionTypes } from './auth.types'
+import { authActionTypes } from './auth.constants'
 
 type SetUserDataActionPayloadType = {
   userId: number | null
@@ -25,7 +25,7 @@ export const setUserData = (
 }
 
 type getCaptchaUrlSuccessActionType = {
-  type: typeof authActionTypes.SET_USER_DATA
+  type: typeof authActionTypes.GET_CAPTCHA_URL_SUCCESS
   payload: { captchaUrl: string }
 }
 

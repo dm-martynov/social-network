@@ -1,4 +1,4 @@
-import { dialogsActionTypes } from './dialogs.types'
+import { dialogsActionTypes } from './dialogs.constants'
 type addNewMessageActionCreatorType = {
   type: typeof dialogsActionTypes.ADD_MESSAGE
   payload: string

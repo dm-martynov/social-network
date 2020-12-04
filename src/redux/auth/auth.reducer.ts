@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form'
 import { authAPI, securityAPI } from '../../api/api'
-import { authActionTypes } from './auth.types'
+import { authActionTypes } from './auth.constants'
 
 const initialState = {
   userId: null as number | null,

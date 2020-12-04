@@ -1,4 +1,4 @@
-import { dialogsActionTypes } from './dialogs.types'
+import { dialogsActionTypes } from './dialogs.constants'
 
 type DialogType = {
   id: number

@@ -1,6 +1,6 @@
 import { ProfileType } from './../../types/types'
 import { PostType } from '../../types/types'
-import { profileActionTypes } from './profile.types'
+import { profileActionTypes } from './profile.constants'
 
 const initialState = {
   postsData: [

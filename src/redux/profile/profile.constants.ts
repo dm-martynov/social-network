@@ -5,4 +5,4 @@ export const profileActionTypes = {
   DELETE_POST: 'DELETE_POST',
   SAVE_PHOTO_SUCCESS: 'SAVE_PHOTO_SUCCESS',
   SAVE_PROFILE_SUCCESS: 'SAVE_PROFILE_SUCCESS',
-}
+} as const
