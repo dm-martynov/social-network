@@ -1,7 +1,7 @@
 import { usersAPI } from '../../api/api'
 import { PhotosType, UserType } from '../../types/types'
 import { updateObjectInArray } from '../../utils/objext-helpers'
-import { ActionsTypes } from './users.actions'
+import { UserActionsTypes } from './users.actions'
 import { usersActionConst } from './users.constants'
 
 const initialState = {
@@ -17,7 +17,7 @@ type InitialStateType = typeof initialState
 
 export const usersReducer = (
   state = initialState,
-  action: ActionsTypes
+  action: UserActionsTypes
 ): InitialStateType => {
   switch (action.type) {
     case usersActionConst.FOLLOW:

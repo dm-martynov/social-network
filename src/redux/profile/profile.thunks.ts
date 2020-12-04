@@ -1,29 +1,44 @@
+import { Dispatch } from 'react'
+import { AppStateType } from './../rootReducer'
+import { ThunkAction } from 'redux-thunk'
 import { stopSubmit } from 'redux-form'
 import { profileAPI } from '../../api/api'
 import { ProfileType } from '../../types/types'
-import { savePhotoSuccess, setStatus, setUserProfile } from './profile.actions'
+import {
+  savePhotoSuccess,
+  setStatus,
+  setUserProfile,
+  ProfileActionTypes,
+} from './profile.actions'
 
-export const getStatus = (userId: number) => async (dispatch: any) => {
+type ThunkType = ThunkAction<
+  Promise<void>,
+  AppStateType,
+  unknown,
+  ProfileActionTypes
+>
+
+export const getStatus = (userId: number): ThunkType => async (dispatch) => {
   const data = await profileAPI.getStatus(userId)
   dispatch(setStatus(data))
 }
 
-export const updateStatus = (status: string) => async (dispatch: any) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
   const data = await profileAPI.updateStatus(status)
   if (data.resultCode === 0) {
     dispatch(setStatus(status))
   }
 }
 
-export const savePhoto = (file: any) => async (dispatch: any) => {
+export const savePhoto = (file: any): ThunkType => async (dispatch) => {
   const data = await profileAPI.savePhoto(file)
   if (data.resultCode === 0) {
     dispatch(savePhotoSuccess(data.data.photos))
   }
 }
 
-export const saveProfile = (profile: ProfileType) => async (
-  dispatch: any,
+export const saveProfile = (profile: ProfileType): ThunkType => async (
+  dispatch,
   getState: any
 ) => {
   const userId = getState().auth.userId
@@ -32,12 +47,15 @@ export const saveProfile = (profile: ProfileType) => async (
     dispatch(getUserProfile(userId))
   } else {
     const message = data.messages.length > 0 ? data.messages[0] : 'Some error'
+    // @ts-ignore
     dispatch(stopSubmit('edit-profile', { _error: message }))
     return Promise.reject(message)
   }
 }
 
-export const getUserProfile = (userId: number) => async (dispatch: any) => {
+export const getUserProfile = (userId: number): ThunkType => async (
+  dispatch
+) => {
   const data = await profileAPI.getProfile(userId)
   dispatch(setUserProfile(data))
 }

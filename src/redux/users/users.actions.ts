@@ -7,7 +7,7 @@ function inferLiteralFromString<T extends string>(arg: T): T {
   return arg
 }
 
-export type ActionsTypes =
+export type UserActionsTypes =
   | FollowSuccessActionType
   | UnfollowSuccessActionType
   | SetUsersActionType
@@ -16,7 +16,7 @@ export type ActionsTypes =
   | ToggleFollowingProgressActionType
   | ToggleIsFetchingActionType
 
-type FollowSuccessActionType = {
+export type FollowSuccessActionType = {
   type: typeof usersActionConst.FOLLOW
   payload: number
 }
@@ -27,7 +27,7 @@ export const followSuccess = (userId: number): FollowSuccessActionType => {
     payload: userId,
   }
 }
-type UnfollowSuccessActionType = {
+export type UnfollowSuccessActionType = {
   type: typeof usersActionConst.UNFOLLOW
   payload: number
 }

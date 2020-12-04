@@ -1,5 +1,10 @@
 import { authActionTypes } from './auth.constants'
 
+export type AuthActionTypes =
+  | SetUserDataActionType
+  | getCaptchaUrlSuccessActionType
+  | getCaptchaUrlSuccessActionType
+
 type SetUserDataActionPayloadType = {
   userId: number | null
   email: string | null

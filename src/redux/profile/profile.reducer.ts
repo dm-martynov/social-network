@@ -1,6 +1,7 @@
 import { ProfileType } from './../../types/types'
 import { PostType } from '../../types/types'
 import { profileActionTypes } from './profile.constants'
+import { ProfileActionTypes } from './profile.actions'
 
 const initialState = {
   postsData: [
@@ -17,7 +18,7 @@ type InitialStateType = typeof initialState
 
 export const profileReducer = (
   state = initialState,
-  action: any
+  action: ProfileActionTypes
 ): InitialStateType => {
   switch (action.type) {
     case profileActionTypes.ADD_POST: {

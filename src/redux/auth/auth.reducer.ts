@@ -1,12 +1,13 @@
 import { stopSubmit } from 'redux-form'
 import { authAPI, securityAPI } from '../../api/api'
+import { AuthActionTypes } from './auth.actions'
 import { authActionTypes } from './auth.constants'
 
 const initialState = {
   userId: null as number | null,
   email: null as string | null,
   login: null as string | null,
-  isAuth: false,
+  isAuth: false as boolean | null,
   captchaUrl: null as string | null,
 }
 
@@ -14,7 +15,7 @@ export type InitialStateType = typeof initialState
 
 export const authReducer = (
   state = initialState,
-  action: any
+  action: AuthActionTypes
 ): InitialStateType => {
   switch (action.type) {
     case authActionTypes.SET_USER_DATA: {
