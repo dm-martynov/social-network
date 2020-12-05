@@ -3,18 +3,18 @@ import Dialogs from './Dialogs'
 
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { compose } from 'redux'
-import { addNewMessageActionCreator } from '../../redux/dialogs/dialogs.actions'
+import { dialogActions } from '../../redux/dialogs/dialogs.actions'
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     dialogsPage: state.dialogsPage,
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addNewMessage: (newMessageBody) => {
-      dispatch(addNewMessageActionCreator(newMessageBody))
+      dispatch(dialogActions.addNewMessageActionCreator(newMessageBody))
     },
   }
 }

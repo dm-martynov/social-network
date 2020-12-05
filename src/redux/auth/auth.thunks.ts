@@ -1,17 +1,11 @@
-import { ResultCodeForCaptcha } from './../../api/api'
+import { ResultCodeForCaptcha } from '../../api/index.api'
 import { AppStateType } from './../rootReducer'
 import { ThunkAction } from 'redux-thunk'
 import { stopSubmit } from 'redux-form'
-import {
-  loginLogoutAPI,
-  ResultCodeEnum,
-  securityCaptchaAPI,
-} from '../../api/api'
-import {
-  getCaptchaUrlSuccess,
-  setUserData,
-  AuthActionTypes,
-} from './auth.actions'
+import { ResultCodeEnum } from '../../api/index.api'
+import { securityCaptchaAPI } from '../../api/securityCaptcha.api'
+import { authenticationAPI } from '../../api/authentication.api'
+import { authActions, AuthActionTypes } from './auth.actions'
 
 type ThunkType = ThunkAction<
   Promise<void>,
@@ -21,10 +15,10 @@ type ThunkType = ThunkAction<
 >
 
 export const setAuthUserDataThunk = (): ThunkType => async (dispatch) => {
-  const data = await loginLogoutAPI.setAuth()
+  const data = await authenticationAPI.setAuth()
   if (data.resultCode === ResultCodeEnum.Success) {
     const { id, email, login } = data.data
-    dispatch(setUserData(id, email, login, true))
+    dispatch(authActions.setUserData(id, email, login, true))
   }
 }
 
@@ -34,7 +28,12 @@ export const login = (
   rememberMe: boolean,
   captcha: string
 ): ThunkType => async (dispatch) => {
-  const data = await loginLogoutAPI.login(email, password, rememberMe, captcha)
+  const data = await authenticationAPI.login(
+    email,
+    password,
+    rememberMe,
+    captcha
+  )
 
   if (data.resultCode === ResultCodeEnum.Success) {
     dispatch(setAuthUserDataThunk())
@@ -51,12 +50,12 @@ export const login = (
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
   const data = await securityCaptchaAPI.getCaptchaUrl()
   const captchaUrl = data.url
-  dispatch(getCaptchaUrlSuccess(captchaUrl))
+  dispatch(authActions.getCaptchaUrlSuccess(captchaUrl))
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-  const data = await loginLogoutAPI.logout()
+  const data = await authenticationAPI.logout()
   if (data.resultCode === ResultCodeEnum.Success) {
-    dispatch(setUserData(null, null, null, false))
+    dispatch(authActions.setUserData(null, null, null, false))
   }
 }
