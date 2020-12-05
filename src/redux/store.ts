@@ -10,6 +10,11 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunkMiddleware))
 )
 
+type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never // Check object Properties type and returns it
+export type InferActionTypes<
+  T extends { [key: string]: (...arg: any[]) => any }
+> = ReturnType<PropertiesTypes<T>>
+
 // @ts-ignore
 window.__store__ = store
 

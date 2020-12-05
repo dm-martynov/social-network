@@ -15,10 +15,6 @@ import {
 import { UserType } from '../../types/types'
 import { AppStateType } from '../../redux/rootReducer'
 import { follow, requestUsers, unfollow } from '../../redux/users/users.thunks'
-import {
-  setCurrentPage,
-  toggleFollowingProgress,
-} from '../../redux/users/users.actions'
 
 type MapStatePropsType = {
   currentPage: number

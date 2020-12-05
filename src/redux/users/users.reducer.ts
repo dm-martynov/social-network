@@ -1,8 +1,6 @@
-import { getUsersAPI } from '../../api/api'
-import { PhotosType, UserType } from '../../types/types'
+import { UserType } from '../../types/types'
 import { updateObjectInArray } from '../../utils/objext-helpers'
-import { UserActionsTypes } from './users.actions'
-import { usersActionConst } from './users.constants'
+import { UserActionTypes } from './users.actions'
 
 const initialState = {
   users: [] as Array<UserType>,
@@ -17,10 +15,10 @@ type InitialStateType = typeof initialState
 
 export const usersReducer = (
   state = initialState,
-  action: UserActionsTypes
+  action: UserActionTypes
 ): InitialStateType => {
   switch (action.type) {
-    case usersActionConst.FOLLOW:
+    case 'FOLLOW':
       return {
         ...state,
         users: updateObjectInArray(state.users, action.payload, 'id', {
@@ -28,7 +26,7 @@ export const usersReducer = (
         }),
       }
 
-    case usersActionConst.UNFOLLOW:
+    case 'UNFOLLOW':
       return {
         ...state,
         users: updateObjectInArray(state.users, action.payload, 'id', {
@@ -36,31 +34,31 @@ export const usersReducer = (
         }),
       }
 
-    case usersActionConst.SET_USERS:
+    case 'SET_USERS':
       return {
         ...state,
         users: [...action.payload],
       }
 
-    case usersActionConst.SET_CURRENT_PAGE:
+    case 'SET_CURRENT_PAGE':
       return {
         ...state,
         currentPage: action.payload,
       }
 
-    case usersActionConst.SET_TOTAL_USERS_COUNT:
+    case 'SET_TOTAL_USERS_COUNT':
       return {
         ...state,
         totalUsersCount: action.payload,
       }
 
-    case usersActionConst.TOGGLE_IS_FETCHING:
+    case 'TOGGLE_IS_FETCHING':
       return {
         ...state,
         isFetching: action.payload,
       }
 
-    case usersActionConst.TOGGLE_IS_FOLLOWING_PROGRESS:
+    case 'TOGGLE_IS_FOLLOWING_PROGRESS':
       return {
         ...state,
         followingInProgress: action.payload.isFetching

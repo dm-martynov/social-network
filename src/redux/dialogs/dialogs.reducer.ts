@@ -1,4 +1,4 @@
-import { dialogsActionTypes } from './dialogs.constants'
+import { DialogActionTypes } from './dialogs.actions'
 
 type DialogType = {
   id: number
@@ -68,10 +68,10 @@ type initialStateType = typeof initialState
 
 export const dialogsReducer = (
   state = initialState,
-  action: any
+  action: DialogActionTypes
 ): initialStateType => {
   switch (action.type) {
-    case dialogsActionTypes.ADD_MESSAGE:
+    case 'ADD_MESSAGE':
       const newMessage = {
         id: 7,
         message: action.payload,

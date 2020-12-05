@@ -1,5 +1,4 @@
 import { AuthActionTypes } from './auth.actions'
-import { authActionTypes } from './auth.constants'
 
 const initialState = {
   userId: null as number | null,
@@ -16,14 +15,14 @@ export const authReducer = (
   action: AuthActionTypes
 ): InitialStateType => {
   switch (action.type) {
-    case authActionTypes.SET_USER_DATA: {
+    case 'SET_USER_DATA': {
       return {
         ...state,
         ...action.payload,
       }
     }
 
-    case authActionTypes.GET_CAPTCHA_URL_SUCCESS: {
+    case 'GET_CAPTCHA_URL_SUCCESS': {
       return {
         ...state,
         ...action.payload,

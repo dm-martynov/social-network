@@ -1,6 +1,5 @@
 import { ProfileType } from './../../types/types'
 import { PostType } from '../../types/types'
-import { profileActionTypes } from './profile.constants'
 import { ProfileActionTypes } from './profile.actions'
 
 const initialState = {
@@ -21,7 +20,7 @@ export const profileReducer = (
   action: ProfileActionTypes
 ): InitialStateType => {
   switch (action.type) {
-    case profileActionTypes.ADD_POST: {
+    case 'ADD_POST': {
       return {
         ...state,
         postsData: [
@@ -34,21 +33,21 @@ export const profileReducer = (
         ],
       }
     }
-    case profileActionTypes.SET_USER_PROFILE:
+    case 'SET_USER_PROFILE':
       return { ...state, profile: action.payload }
-    case profileActionTypes.SET_STATUS:
+    case 'SET_STATUS':
       return { ...state, status: action.payload }
-    case profileActionTypes.DELETE_POST:
+    case 'DELETE_POST':
       return {
         ...state,
         postsData: state.postsData.filter((post) => post.id !== action.payload),
       }
-    case profileActionTypes.SAVE_PHOTO_SUCCESS:
+    case 'SAVE_PHOTO_SUCCESS':
       return {
         ...state,
         profile: { ...state.profile, photos: action.payload } as ProfileType,
       }
-    case profileActionTypes.SAVE_PROFILE_SUCCESS:
+    case 'SAVE_PROFILE_SUCCESS':
       return {
         ...state,
         profile: { ...state.profile, ...action.payload },
