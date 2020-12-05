@@ -1,6 +1,6 @@
 import { Dispatch } from 'react'
 import { ThunkAction } from 'redux-thunk'
-import { usersAPI } from '../../api/api'
+import { getUsersAPI } from '../../api/api'
 import { AppStateType } from '../rootReducer'
 import {
   followSuccess,
@@ -32,7 +32,7 @@ export const requestUsers = (
 ): ThunkType => async (dispatch, getState) => {
   dispatch(toggleIsFetching(true))
   dispatch(setCurrentPage(page))
-  const data = await usersAPI.getUsers(page, pageSize)
+  const data = await getUsersAPI.getUsers(page, pageSize)
   dispatch(toggleIsFetching(false))
   dispatch(setUsers(data.items))
   dispatch(setUsersTotalCount(data.totalCount))
@@ -58,7 +58,7 @@ export const unfollow = (userId: number): ThunkType => async (dispatch) => {
   _followUnfollowFlow(
     dispatch,
     userId,
-    usersAPI.deleteFollowing.bind(usersAPI),
+    getUsersAPI.deleteFollowing.bind(getUsersAPI),
     unfollowSuccess
   )
 }
@@ -67,7 +67,7 @@ export const follow = (userId: number): ThunkType => async (dispatch) => {
   _followUnfollowFlow(
     dispatch,
     userId,
-    usersAPI.addFollowing.bind(usersAPI),
+    getUsersAPI.addFollowing.bind(getUsersAPI),
     followSuccess
   )
 }

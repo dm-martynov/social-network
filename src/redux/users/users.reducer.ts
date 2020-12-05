@@ -1,4 +1,4 @@
-import { usersAPI } from '../../api/api'
+import { getUsersAPI } from '../../api/api'
 import { PhotosType, UserType } from '../../types/types'
 import { updateObjectInArray } from '../../utils/objext-helpers'
 import { UserActionsTypes } from './users.actions'

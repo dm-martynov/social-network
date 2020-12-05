@@ -31,7 +31,8 @@ export type ProfileType = {
 
 export type UserType = {
   id: number
-  namne: string
+  name: string
   status: string
   photos: PhotosType
+  followed?: boolean
 }

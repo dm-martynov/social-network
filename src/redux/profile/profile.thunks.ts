@@ -2,7 +2,7 @@ import { Dispatch } from 'react'
 import { AppStateType } from './../rootReducer'
 import { ThunkAction } from 'redux-thunk'
 import { stopSubmit } from 'redux-form'
-import { profileAPI } from '../../api/api'
+import { ProfileAPI } from '../../api/api'
 import { ProfileType } from '../../types/types'
 import {
   savePhotoSuccess,
@@ -19,19 +19,19 @@ type ThunkType = ThunkAction<
 >
 
 export const getStatus = (userId: number): ThunkType => async (dispatch) => {
-  const data = await profileAPI.getStatus(userId)
+  const data = await ProfileAPI.getStatus(userId)
   dispatch(setStatus(data))
 }
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
-  const data = await profileAPI.updateStatus(status)
+  const data = await ProfileAPI.updateStatus(status)
   if (data.resultCode === 0) {
     dispatch(setStatus(status))
   }
 }
 
 export const savePhoto = (file: any): ThunkType => async (dispatch) => {
-  const data = await profileAPI.savePhoto(file)
+  const data = await ProfileAPI.savePhoto(file)
   if (data.resultCode === 0) {
     dispatch(savePhotoSuccess(data.data.photos))
   }
@@ -42,7 +42,7 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (
   getState: any
 ) => {
   const userId = getState().auth.userId
-  const data = await profileAPI.saveProfile(profile)
+  const data = await ProfileAPI.saveProfile(profile)
   if (data.resultCode === 0) {
     dispatch(getUserProfile(userId))
   } else {
@@ -56,6 +56,6 @@ export const saveProfile = (profile: ProfileType): ThunkType => async (
 export const getUserProfile = (userId: number): ThunkType => async (
   dispatch
 ) => {
-  const data = await profileAPI.getProfile(userId)
+  const data = await ProfileAPI.getProfile(userId)
   dispatch(setUserProfile(data))
 }

@@ -1,5 +1,3 @@
-import { stopSubmit } from 'redux-form'
-import { authAPI, securityAPI } from '../../api/api'
 import { AuthActionTypes } from './auth.actions'
 import { authActionTypes } from './auth.constants'
 
