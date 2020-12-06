@@ -23,6 +23,7 @@ export type LoginFormValuesType = {
   password: string
   email: string
 }
+
 type LoginFormValuesTypeKeys = GetStringKeys<LoginFormValuesType>
 
 const LoginForm: React.FC<

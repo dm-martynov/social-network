@@ -64,12 +64,12 @@ const initialState = {
   ] as Array<DialogType>,
 }
 
-type initialStateType = typeof initialState
+export type DialogsInitialStateType = typeof initialState
 
 export const dialogsReducer = (
   state = initialState,
   action: DialogActionTypes
-): initialStateType => {
+): DialogsInitialStateType => {
   switch (action.type) {
     case 'ADD_MESSAGE':
       const newMessage = {

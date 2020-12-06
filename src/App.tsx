@@ -11,16 +11,22 @@ import Navbar from './components/Navbar/Navbar'
 import UsersContainer from './components/Users/UsersContainer'
 import { withSuspense } from './hoc/withSuspense'
 import { initializeApp } from './redux/app/app.thunks'
+import { AppStateType } from './redux/rootReducer'
 import store from './redux/store'
 
-const DialogsContainer = React.lazy(() =>
-  import('./components/Dialogs/Dialogs-Container')
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+  initializeApp: () => void
+}
+
+const DialogsContainer = React.lazy(
+  () => import('./components/Dialogs/Dialogs-Container')
 )
-const ProfileContainer = React.lazy(() =>
-  import('./components/Profile/ProfileContainer')
+const ProfileContainer = React.lazy(
+  () => import('./components/Profile/ProfileContainer')
 )
 
-class App extends React.Component {
+class App extends React.Component<MapPropsType & DispatchPropsType> {
   componentDidMount() {
     this.props.initializeApp()
   }
@@ -52,16 +58,16 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
 })
 
-const AppContainer = compose(
+const AppContainer = compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, { initializeApp })
 )(App)
 
-const MainApp = (props) => {
+const MainApp: React.FC = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>

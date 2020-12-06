@@ -1,20 +1,16 @@
+import { BaseThunkType } from './../store'
 import { ResultCodeForCaptcha } from '../../api/index.api'
-import { AppStateType } from './../rootReducer'
-import { ThunkAction } from 'redux-thunk'
+
 import { stopSubmit } from 'redux-form'
 import { ResultCodeEnum } from '../../api/index.api'
 import { securityCaptchaAPI } from '../../api/securityCaptcha.api'
 import { authenticationAPI } from '../../api/authentication.api'
 import { authActions, AuthActionTypes } from './auth.actions'
+import { Action } from 'redux'
 
-type ThunkType = ThunkAction<
-  Promise<void>,
-  AppStateType,
-  unknown,
-  AuthActionTypes
->
+type AuthThunkType = BaseThunkType<AuthActionTypes>
 
-export const setAuthUserDataThunk = (): ThunkType => async (dispatch) => {
+export const setAuthUserDataThunk = (): AuthThunkType => async (dispatch) => {
   const data = await authenticationAPI.setAuth()
   if (data.resultCode === ResultCodeEnum.Success) {
     const { id, email, login } = data.data
@@ -27,7 +23,7 @@ export const login = (
   password: string,
   rememberMe: boolean,
   captcha: string
-): ThunkType => async (dispatch) => {
+): BaseThunkType<Action> => async (dispatch) => {
   const data = await authenticationAPI.login(
     email,
     password,
@@ -42,18 +38,17 @@ export const login = (
       dispatch(getCaptchaUrl())
     }
     const message = data.messages.length > 0 ? data.messages[0] : 'Some error'
-    // @ts-ignore
     dispatch(stopSubmit('login', { _error: message }))
   }
 }
 
-export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
+export const getCaptchaUrl = (): AuthThunkType => async (dispatch) => {
   const data = await securityCaptchaAPI.getCaptchaUrl()
   const captchaUrl = data.url
   dispatch(authActions.getCaptchaUrlSuccess(captchaUrl))
 }
 
-export const logout = (): ThunkType => async (dispatch) => {
+export const logout = (): AuthThunkType => async (dispatch) => {
   const data = await authenticationAPI.logout()
   if (data.resultCode === ResultCodeEnum.Success) {
     dispatch(authActions.setUserData(null, null, null, false))

@@ -23,7 +23,7 @@ export const profileAPI = {
         return res.data
       })
   },
-  savePhoto(photoFile: any) {
+  savePhoto(photoFile: File) {
     const formData = new FormData()
     formData.append('image', photoFile)
     return instance

@@ -1,9 +1,10 @@
-import { appActionTypes } from './app.types'
+import { InferActionTypes } from '../store'
 
-type InitializingSuccessActionType = {
-  type: typeof appActionTypes.SET_INITIALIZED
+export type AppActionTypes = InferActionTypes<typeof appActions>
+
+export const appActions = {
+  initializingSuccess: () =>
+    ({
+      type: 'SET_INITIALIZED',
+    } as const),
 }
-
-export const initializingSuccess = (): InitializingSuccessActionType => ({
-  type: appActionTypes.SET_INITIALIZED,
-})

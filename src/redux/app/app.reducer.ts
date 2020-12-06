@@ -1,4 +1,4 @@
-import { appActionTypes } from './app.types'
+import { AppActionTypes } from './app.actions'
 
 type StateType = {
   initialized: boolean
@@ -10,10 +10,10 @@ const INITIAL_STATE: StateType = {
 
 export const appReducer = (
   state: StateType = INITIAL_STATE,
-  action: any
+  action: AppActionTypes
 ): StateType => {
   switch (action.type) {
-    case appActionTypes.SET_INITIALIZED:
+    case 'SET_INITIALIZED':
       return {
         ...state,
         initialized: true,
