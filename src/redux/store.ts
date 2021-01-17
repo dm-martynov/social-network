@@ -23,7 +23,4 @@ export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<
   A
 >
 
-// @ts-ignore
-window.__store__ = store
-
 export default store

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from 'react'
 import Profile from './Profile'
 import { connect } from 'react-redux'

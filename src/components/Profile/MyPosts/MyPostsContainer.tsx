@@ -3,7 +3,7 @@ import { profileActions } from '../../../redux/profile/profile.actions'
 
 import MyPosts from './MyPosts'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     postsData: state.profilePage.postsData,
     newPostText: state.profilePage.newPostText,

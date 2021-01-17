@@ -4,10 +4,12 @@ import { BrowserRouter, Route, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 import './App.css'
 import Preloader from './components/common/preloader/preloader'
+import DialogsContainer from './components/Dialogs/Dialogs-Container'
 
 import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './components/Login/Login'
 import Navbar from './components/Navbar/Navbar'
+import ProfileContainer from './components/Profile/ProfileContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import { withSuspense } from './hoc/withSuspense'
 import { initializeApp } from './redux/app/app.thunks'
@@ -19,12 +21,9 @@ type DispatchPropsType = {
   initializeApp: () => void
 }
 
-const DialogsContainer = React.lazy(
-  () => import('./components/Dialogs/Dialogs-Container')
-)
-const ProfileContainer = React.lazy(
-  () => import('./components/Profile/ProfileContainer')
-)
+const SuspendedDialogs = withSuspense(DialogsContainer)
+
+const SuspendedProfile = withSuspense(ProfileContainer)
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
   componentDidMount() {
@@ -41,11 +40,8 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
         <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/dialogs' render={withSuspense(DialogsContainer)} />
-          <Route
-            path='/profile/:userId?'
-            render={withSuspense(ProfileContainer)}
-          />
+          <Route path='/dialogs' render={() => <SuspendedDialogs />} />
+          <Route path='/profile/:userId?' render={() => <SuspendedProfile />} />
           <Route
             exact
             path='/users'
