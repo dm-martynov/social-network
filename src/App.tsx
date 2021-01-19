@@ -1,6 +1,11 @@
 import React from 'react'
 import { connect, Provider } from 'react-redux'
-import { BrowserRouter, Route, withRouter } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Route,
+  RouteComponentProps,
+  withRouter,
+} from 'react-router-dom'
 import { compose } from 'redux'
 import './App.css'
 import Preloader from './components/common/preloader/preloader'
@@ -21,9 +26,13 @@ type DispatchPropsType = {
   initializeApp: () => void
 }
 
-const SuspendedDialogs = withSuspense(DialogsContainer)
+interface MatchParams {
+  userId: string
+}
 
-const SuspendedProfile = withSuspense(ProfileContainer)
+interface MatchProps extends RouteComponentProps<MatchParams> {}
+
+const SuspendedDialogs = withSuspense(DialogsContainer)
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
   componentDidMount() {
@@ -41,7 +50,12 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render={() => <SuspendedDialogs />} />
-          <Route path='/profile/:userId?' render={() => <SuspendedProfile />} />
+          <Route
+            path='/profile/:userId?'
+            render={({ match }: RouteComponentProps<MatchParams>) => (
+              <ProfileContainer userId={match.params.userId} />
+            )}
+          />
           <Route
             exact
             path='/users'
